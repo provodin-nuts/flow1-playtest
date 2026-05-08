@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import AlienTabBar from "../shared/AlienTabBar";
 
 const imgAndroidBluetooth      = "https://www.figma.com/api/mcp/asset/57dc6fb8-c18e-4479-a70c-a718b54867ae";
@@ -25,6 +26,12 @@ function StatusBar() {
 }
 
 export default function Swirl({ onNavigate }: { onNavigate: (screen: string) => void }) {
+  // After delay 800ms → First_reward (Figma: Smart animate, Ease out, 300ms)
+  useEffect(() => {
+    const t = setTimeout(() => onNavigate("first-reward"), 800);
+    return () => clearTimeout(t);
+  }, [onNavigate]);
+
   return (
     <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden", background: "#000" }}>
       <style>{`
@@ -34,39 +41,34 @@ export default function Swirl({ onNavigate }: { onNavigate: (screen: string) => 
         }
       `}</style>
 
-      {/* Swirl background — only THIS scales, UI overlays are static */}
-      <div
-        onClick={() => onNavigate("first-reward")}
+      {/* ONLY the swirl image pulses */}
+      <img
+        alt=""
+        src="/img/swirl-bg.jpg"
         style={{
           position: "absolute",
           inset: 0,
-          cursor: "pointer",
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          objectPosition: "center center",
           animation: "swirlPulse 4s ease-in-out infinite",
           transformOrigin: "center center",
         }}
-      >
-        <img
-          alt="swirl"
-          src="/img/swirl-screen.png"
-          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }}
-        />
-      </div>
+      />
 
-      {/* Status bar — static overlay, covers baked-in status bar in image */}
+      {/* Status bar — static, z-50 */}
       <div style={{
         position: "absolute", top: 0, left: 0, right: 0, zIndex: 50,
-        background: "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 100%)",
         paddingTop: 4,
       }}>
         <StatusBar />
       </div>
 
-      {/* Tab bar — static overlay, covers baked-in tab bar in image */}
+      {/* Tab bar — static, z-50, opaque background */}
       <div style={{
         position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 50,
-        background: "rgba(15,5,25,0.88)",
-        backdropFilter: "blur(4px)",
-        WebkitBackdropFilter: "blur(4px)",
+        background: "#100820",
       }}>
         <AlienTabBar />
       </div>

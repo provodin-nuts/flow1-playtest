@@ -54,7 +54,7 @@ export default function App() {
           )}
 
           {screen === "first-reward" && (
-            <motion.div key="first-reward" className="absolute inset-0" {...fade(0.4)}>
+            <motion.div key="first-reward" className="absolute inset-0" {...fade(0.3)}>
               <FirstReward onNavigate={navigate} />
             </motion.div>
           )}
