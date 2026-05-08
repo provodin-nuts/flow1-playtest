@@ -391,7 +391,13 @@ function TabBar() {
   );
 }
 
-export default function FeedScreen() {
+export default function FeedScreen({ onNavigate }: { onNavigate?: (screen: string) => void }) {
+  // 8-second timer → navigate to "tap-reward"
+  useEffect(() => {
+    const id = setTimeout(() => onNavigate?.("tap-reward"), 8_000);
+    return () => clearTimeout(id);
+  }, [onNavigate]);
+
   return (
     <div className="relative overflow-hidden size-full bg-[#161616]">
       <style>{`.feed-scroll::-webkit-scrollbar { display: none; }`}</style>
