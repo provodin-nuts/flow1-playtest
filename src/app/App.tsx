@@ -2,8 +2,9 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import FeedScreen from "../imports/01Feed/01Feed";
 import TapReward from "../imports/TapReward/TapReward";
+import Swirl from "../imports/Swirl/Swirl";
 
-type Screen = "feed" | "tap-reward";
+type Screen = "feed" | "tap-reward" | "swirl";
 
 const FRAME_W = 360;
 
@@ -34,6 +35,16 @@ export default function App() {
               exit={{ opacity: 0, transition: { duration: 0.3 } }}
             >
               <TapReward onNavigate={navigate} />
+            </motion.div>
+          )}
+
+          {screen === "swirl" && (
+            <motion.div key="swirl" className="absolute inset-0"
+              initial={{ opacity: 0, scale: 1.08 }}
+              animate={{ opacity: 1, scale: 1, transition: { duration: 1.2, ease: [0, 0, 0.42, 1] } }}
+              exit={{ opacity: 0, transition: { duration: 0.3 } }}
+            >
+              <Swirl onNavigate={navigate} />
             </motion.div>
           )}
         </AnimatePresence>
