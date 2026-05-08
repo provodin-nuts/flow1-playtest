@@ -1,0 +1,4 @@
+@import './fonts.css';
+@import './tailwind.css';
+
+* { box-sizing: border-box; }

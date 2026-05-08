@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Russo+One&display=swap');
+
+[class*="Russo_One"] {
+  font-family: 'Russo One', sans-serif !important;
+}
+
+[class*="Montserrat"] {
+  font-family: 'Montserrat', sans-serif !important;
+}
